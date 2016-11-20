@@ -1,16 +1,10 @@
-#ifndef _PDA_H
-#define _PDA_H
-
 //a pda machine
 
-#include <stdio.h>
-#include "boolean.h"
-#include "stacklist.h"
-#include "reader.h"
+#include "header_dir/pda.h"
 
-
-extern char state;
-extern Stack stack;
+char state;
+Stack stack;
+static FILE *source;
 
 void pda_read(char fileName[strlength]);
 
@@ -20,6 +14,3 @@ boolean pda_transition(char alphabet);
 
 
 
-
-
-#endif
