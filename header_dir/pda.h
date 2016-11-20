@@ -20,6 +20,7 @@ boolean pda_transition(char alphabet);
 
 void pda_showCondition();
 
+boolean pda_finalState();
 
 
 #endif

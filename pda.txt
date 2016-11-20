@@ -1,4 +1,91 @@
-( q z p + y
-( p y q e
-) q z p + y
-) p y q e
+( q Z b + B
+1 q Z n Z
+2 q Z n Z
+3 q Z n Z
+4 q Z n Z
+5 q Z n Z
+6 q Z n Z
+7 q Z n Z
+8 q Z n Z
+9 q Z n Z
+( b B b + B
+1 b B c B
+2 b B c B
+3 b B c B
+4 b B c B
+5 b B c B
+6 b B c B
+7 b B c B
+8 b B c B
+9 b B c B
+) c B c e
+. c B d + E
++ c B o + O
+- c B o + O
+* c B o + O
+/ c B o + O
++ c Z o + P
+- c Z o + P
+* c Z o + P
+/ c Z o + P
+1 c B c B
+2 c B c B
+3 c B c B
+4 c B c B
+5 c B c B
+6 c B c B
+7 c B c B
+8 c B c B
+9 c B c B
+1 n Z n Z
+2 n Z n Z
+3 n Z n Z
+4 n Z n Z
+5 n Z n Z
+6 n Z n Z
+7 n Z n Z
+8 n Z n Z
+9 n Z n Z
+. n Z d + D
++ n Z o + P
+- n Z o + P
+* n Z o + P
+/ n Z o + P
+1 d D n e
+2 d D n e
+3 d D n e
+4 d D n e
+5 d D n e
+6 d D n e
+7 d D n e
+8 d D n e
+9 d D n e
+1 d E c e
+2 d E c e
+3 d E c e
+4 d E c e
+5 d E c e
+6 d E c e
+7 d E c e
+8 d E c e
+9 d E c e
+1 o P n e
+2 o P n e
+3 o P n e
+4 o P n e
+5 o P n e
+6 o P n e
+7 o P n e
+8 o P n e
+9 o P n e
+1 o O c e
+2 o O c e
+3 o O c e
+4 o O c e
+5 o O c e
+6 o O c e
+7 o O c e
+8 o O c e
+9 o O c e
+( o P b B
+( o O b B

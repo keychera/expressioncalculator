@@ -10,7 +10,7 @@ void pda_initiate(char fileName[strlength]){
 	reader_openFile(fileName);
 	state = 'q';
 	CreateEmptyStack(&stack);
-	Push(&stack,'z');
+	Push(&stack,'Z');
 }
 
 boolean pda_transition(char alphabet){
@@ -26,7 +26,6 @@ boolean pda_transition(char alphabet){
 		if (!found) {
 			ignore++;
 		} else {
-			ignore = 0;
 			reader_removeID(sentence);
 			found = (reader_checkID(sentence) == InfoTop(stack));
 			if (!found) {
@@ -35,7 +34,7 @@ boolean pda_transition(char alphabet){
 				reader_removeID(sentence);
 			}
 		}
-	} while ((!found) && (!mystrcmp(sentence,MARK)));
+	} while ((!found) && (mystrcmp(sentence,MARK) != 0));
 	if (found) {
 		state = reader_checkID(sentence);
 		reader_removeID(sentence);
@@ -49,8 +48,10 @@ boolean pda_transition(char alphabet){
 					Pop(&stack,&dummy);
 					break;
 			default  ://change top of stack
-					Pop(&stack,&dummy);
-					Push(&stack,reader_checkID(sentence));
+					if (reader_checkID(sentence) != InfoTop(stack)){
+						Pop(&stack,&dummy);
+						Push(&stack,reader_checkID(sentence));
+					}
 		}
 	}
 	if (IsSEmpty(stack)) found = false;
@@ -62,5 +63,8 @@ void pda_showCondition(){
 	printf("current stack's top : %c\n",InfoTop(stack));
 }
 
+boolean pda_finalState(){
+	return (((state == 'q') || (state == 'n') || (state == 'c')) && (InfoTop(stack) == 'Z'));
+}
 
 
