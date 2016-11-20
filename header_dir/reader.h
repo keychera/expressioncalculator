@@ -1,7 +1,10 @@
 #ifndef reader_H
 #define reader_H
 
+#define MARK "zzz"
+
 #include "boolean.h"
+#include "mystring.h"
 
 #define strlength 99
 #define idlength 5
@@ -10,7 +13,7 @@
 
 boolean reader_openFile(char fileName[strlength]);
 
-void reader_checkID(char* sentence,char* outp);
+char reader_checkID(char* sentence);
 
 void reader_searchID(char id,char *outp,int ignore);
 

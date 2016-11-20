@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include "boolean.h"
-#include "lilfx.h"
 
 int mystrlen(const char *str);
 

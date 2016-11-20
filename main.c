@@ -5,16 +5,20 @@
 #include "header_dir/pda.h"
 
 int main () {
-	reader_openFile("pda.txt");
+	pda_initiate("pda.txt");
+	pda_showCondition();
 	char sentence[strlength];
-	reader_searchID('(',sentence,0);
-	printf("%s",sentence);
-	reader_removeID(sentence);
-	printf("%s",sentence);
-	reader_removeID(sentence);
-	printf("%s",sentence);
-	reader_removeID(sentence);
-	printf("%s",sentence);
+	reader_searchID('a',sentence,0);
+	scanf("%s",sentence);
+	char *s;
+	for ( s=&sentence[0]; (*s != '\000'); s++ ){
+		if (pda_transition(*s))
+			pda_showCondition();
+		else {
+			printf("input tidak diterima PDA\n");
+			break;
+		}
+	}
 	reader_close();
 	return 0;
 }

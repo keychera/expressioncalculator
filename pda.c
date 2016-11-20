@@ -1,16 +1,66 @@
 //a pda machine
 
+#include <stdio.h>
 #include "header_dir/pda.h"
 
 char state;
 Stack stack;
-static FILE *source;
 
-void pda_read(char fileName[strlength]);
+void pda_initiate(char fileName[strlength]){
+	reader_openFile(fileName);
+	state = 'q';
+	CreateEmptyStack(&stack);
+	Push(&stack,'z');
+}
 
-boolean pda_transition(char alphabet);
+boolean pda_transition(char alphabet){
 //read alphabet and global state and top of stack and change the state and the stack
 //return true if it succesfully transition
+	boolean found = false;
+	int ignore = 0;
+	char sentence[strlength];
+	do {
+		reader_searchID(alphabet,sentence,ignore);
+		reader_removeID(sentence);
+		found = (reader_checkID(sentence) == state);
+		if (!found) {
+			ignore++;
+		} else {
+			ignore = 0;
+			reader_removeID(sentence);
+			found = (reader_checkID(sentence) == InfoTop(stack));
+			if (!found) {
+				ignore++;
+			} else {
+				reader_removeID(sentence);
+			}
+		}
+	} while ((!found) && (!mystrcmp(sentence,MARK)));
+	if (found) {
+		state = reader_checkID(sentence);
+		reader_removeID(sentence);
+		infotypeSt dummy;
+		switch (reader_checkID(sentence)) {
+			case '+' ://push stack
+					reader_removeID(sentence);
+					Push(&stack,reader_checkID(sentence));
+					break;
+			case 'e' ://pop stack
+					Pop(&stack,&dummy);
+					break;
+			default  ://change top of stack
+					Pop(&stack,&dummy);
+					Push(&stack,reader_checkID(sentence));
+		}
+	}
+	if (IsSEmpty(stack)) found = false;
+	return found;
+}
+
+void pda_showCondition(){
+	printf("current state : %c\n",state);
+	printf("current stack's top : %c\n",InfoTop(stack));
+}
 
 
 

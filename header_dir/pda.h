@@ -12,13 +12,13 @@
 extern char state;
 extern Stack stack;
 
-void pda_read(char fileName[strlength]);
+void pda_initiate(char fileName[strlength]);
 
 boolean pda_transition(char alphabet);
 //read alphabet and global state and top of stack and change the state and the stack
 //return true if it succesfully transition
 
-
+void pda_showCondition();
 
 
 

@@ -1,6 +1,5 @@
 #include "header_dir/reader.h"
 #include <stdio.h>
-#include "header_dir/mystring.h"
 
 //file var for reader.c
 static FILE * source;
@@ -15,23 +14,21 @@ boolean reader_openFile(char fileName[strlength]){
 		return false;
 }
 
-void reader_checkID(char* sentence,char* outp)
+char reader_checkID(char* sentence)
 {
 	char* s;
 	s=&sentence[0];
-	*outp = *s;
+	return *s;
 }
 
-void reader_searchID(char id,char *outp,int ignore){
+void reader_searchID(char id,char *outp,int ignore){ //this ignore thing actually is not efficient but whatever for now, deadlines
 //search the sentence of the following id 
 //to be the parameter of build narration and pass it to output
 	boolean found = false;
 	char sentence[strlength];
-	char idcheck;
 	while ((!found) && (fgets(sentence,strlength,source) != NULL)){
-		reader_checkID(sentence,&idcheck);
-		found = (idcheck == id);
-		if (ignore != 0) {
+		found = (reader_checkID(sentence) == id);
+		if ((found) && (ignore != 0)) {
 			ignore--;
 			found = false;
 		}
@@ -39,7 +36,7 @@ void reader_searchID(char id,char *outp,int ignore){
 	if (found)
 		mystrcpy(outp,sentence);
 	else
-		outp = NULL;
+		mystrcpy(outp,MARK);
 	rewind(source);
 }
 
