@@ -21,17 +21,19 @@ boolean pda_transition(char alphabet){
 	char sentence[strlength];
 	do {
 		reader_searchID(alphabet,sentence,ignore);
-		reader_removeID(sentence);
-		found = (reader_checkID(sentence) == state);
-		if (!found) {
-			ignore++;
-		} else {
+		if (mystrcmp(sentence,MARK) != 0) {
 			reader_removeID(sentence);
-			found = (reader_checkID(sentence) == InfoTop(stack));
+			found = (reader_checkID(sentence) == state);
 			if (!found) {
 				ignore++;
 			} else {
 				reader_removeID(sentence);
+				found = (reader_checkID(sentence) == InfoTop(stack));
+				if (!found) {
+					ignore++;
+				} else {
+					reader_removeID(sentence);
+				}
 			}
 		}
 	} while ((!found) && (mystrcmp(sentence,MARK) != 0));

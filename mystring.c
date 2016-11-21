@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "header_dir/mystring.h"
 
 int mystrlen(const char *str){
@@ -36,4 +37,19 @@ void myprintstr(const char *str){
 		printf("%c",str[i]);
 		i++;
 	}
+}
+
+char *mystrcat(char *dest, const char *src){
+	int i = 0;
+	while (dest[i] != '\000') {
+		i++;
+	}
+	int j = 0;
+	while (src[j] != '\000') {
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	dest[i] = '\000';
+	return dest;
 }
