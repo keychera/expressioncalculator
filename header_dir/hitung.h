@@ -5,8 +5,8 @@
 
 boolean noBracket(char *inp);
 
-char* debracketize(char *inp,char opPass);
+char* debracketize(char *inp);
 
 custList StringToList(char* S);
 
-float HitungEkspresi(char* S,char operator);
+float HitungEkspresi(char* S);

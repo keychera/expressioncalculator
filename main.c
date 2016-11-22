@@ -21,11 +21,11 @@ int main () {
 	}
 	if(!notFinal){
 		if (pda_finalState()){
+			printf("the sentence : %s\n",debracketize(sentence));
 			if (pda_floatExist()) {
-				printf("%s\n",debracketize(sentence,'+'));
-				printf("%.2f\n",HitungEkspresi(debracketize(sentence,'+'),'+'));
+				printf("%.2f\n",HitungEkspresi(debracketize(sentence)));
 			} else
-				printf("%d\n",(int)HitungEkspresi(debracketize(sentence,'+'),'+'));
+				printf("%d\n",(int)HitungEkspresi(debracketize(sentence)));
 		} else {
 			printf("SINTAK ERROR\n");
 		}

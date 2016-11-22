@@ -14,67 +14,87 @@ boolean noBracket(char *inp){
 	return !bracketExist;
 }
 
-char* debracketize(char *inp,char opPass){
+char* debracketize(char *inp){
 	char *out = (char*) malloc(mystrlen(inp));
+	mystrcpy(out,"");
 	if (noBracket(inp)) {
 		if(mystrlen(inp) > 0)
-			sprintf(out,"%f",HitungEkspresi(inp,opPass));
+			sprintf(out,"%f",HitungEkspresi(inp));
 	} else {
-		int i = 0;infotypeSt dummy;
-		out = (char*) malloc(mystrlen(inp));
-		
-		char *pass = (char*) malloc(mystrlen(inp));
 		char *pt = &inp[0];
+		char *pass = (char*) malloc(mystrlen(inp));
+		char *passO = (char*) malloc(2);
+		int i = 0;
 		
 		Stack bracket;
 		CreateEmptyStack(&bracket);
 		Push(&bracket,'z');
+		infotypeSt dummy;
 		
-		boolean flagForCalculate = false;
-		char operatorPass = '+';
-		char operatorPrec = '+';
+		boolean flagCalculate = false;
+		boolean flagOperator = false;
+		
 		while (*pt != '\000') {
-			switch(*pt) {
-				case '(' :
-						if (InfoTop(bracket) != 'z') {
+			switch (*pt) {
+				case '(':
+						if (InfoTop(bracket) == 'b') {
 							pass[i] = *pt;
-							i++;						
+							i++;
 						}
 						Push(&bracket,'b');
 					break;
-				case ')' :
+				case ')':
 						Pop(&bracket,&dummy);
-						if (InfoTop(bracket) == 'z') {
-							flagForCalculate = true;						
+						if (InfoTop(bracket) == 'z'){
+							flagCalculate = true;
 						} else {
 							pass[i] = *pt;
 							i++;
 						}
 					break;
-				case '+' :
-				case '*' :
-				case '/' :
-				case '-' :
-						pass[i] = *pt;
-						i++;
-					if (*(pt+1) == '(') {
-						operatorPrec =  operatorPass ;
-						operatorPass = *pt;
-						flagForCalculate = true;
-					}
-						break;
+				case '+':
+				case '-':
+				case '*':
+				case '/':
+						if (InfoTop(bracket) == 'z') {
+							if (*(pt+1) == '('){
+								flagCalculate = true;
+								flagOperator = true;
+								passO[0] = *pt;
+								passO[1] = '\000';
+							} else if (*(pt-1) == ')') {
+								flagOperator = true;
+								passO[0] = *pt;
+								passO[1] = '\000';
+							} else {
+								pass[i] = *pt;
+								i++;
+							}
+						} else {
+							pass[i] = *pt;
+							i++;
+						}
+					break;
 				default:
 					pass[i] = *pt;
 					i++;
-						
+					if (*(pt+1) == '\000')
+						flagCalculate = true;
+			}
+			if ((flagCalculate) || (flagOperator)) {
+				pass[i] = '\000';
+				if (flagCalculate){
+					char* in = (char*) malloc(mystrlen(inp));
+					sprintf(in,"%f",HitungEkspresi(debracketize(pass)));
+					mystrcat(out,in);
+				}
+				if (flagOperator)
+					mystrcat(out,passO);
+				i = 0;
+				flagCalculate = false;
+				flagOperator = false;
 			}
 			pt++;
-			if (flagForCalculate) {
-				pass[i] = '\000';
-				mystrcat(out,debracketize(pass,operatorPrec));
-				i = 0;
-				flagForCalculate = false;
-			}
 		}
 	}
 	return out;
@@ -156,7 +176,7 @@ custList StringToList(char* S){
 	return L;
 }
 
-float HitungEkspresi(char* S,char operator){
+float HitungEkspresi(char* S){
 	custList L;
 	custinfotype X;
 	custaddress P;
@@ -247,14 +267,6 @@ float HitungEkspresi(char* S,char operator){
 		X.Val='-';
 		P=custSearch(L,X);
 	}
-	//key edit
-	float out;
-	switch(operator){
-		case '+':
-		case '*':
-		case '/': out = custVal(custFirst(L)); break;
-		case '-': out = (-1*custVal(custFirst(L))); break;
-	}
-	return out;
+	return custVal(custFirst(L));
 }
 
