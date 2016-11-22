@@ -29,8 +29,9 @@ int main () {
 		} else {
 			printf("SINTAK ERROR\n");
 		}
+	} else {
+		printf("SINTAK ERROR\n");
 	}
-	
 	reader_close();
 	return 0;
 }
