@@ -1,4 +1,5 @@
 ( q Z b + B
+0 q Z n Z
 1 q Z n Z
 2 q Z n Z
 3 q Z n Z
@@ -9,6 +10,7 @@
 8 q Z n Z
 9 q Z n Z
 ( b B b + B
+0 b B c B
 1 b B c B
 2 b B c B
 3 b B c B
@@ -28,6 +30,7 @@
 - c Z o + P
 * c Z o + P
 / c Z o + P
+0 c B c B
 1 c B c B
 2 c B c B
 3 c B c B
@@ -37,6 +40,7 @@
 7 c B c B
 8 c B c B
 9 c B c B
+0 n Z n Z
 1 n Z n Z
 2 n Z n Z
 3 n Z n Z
@@ -51,6 +55,7 @@
 - n Z o + P
 * n Z o + P
 / n Z o + P
+0 d D n e
 1 d D n e
 2 d D n e
 3 d D n e
@@ -60,6 +65,7 @@
 7 d D n e
 8 d D n e
 9 d D n e
+0 d E c e
 1 d E c e
 2 d E c e
 3 d E c e
@@ -69,6 +75,7 @@
 7 d E c e
 8 d E c e
 9 d E c e
+0 o P n e
 1 o P n e
 2 o P n e
 3 o P n e
@@ -78,6 +85,7 @@
 7 o P n e
 8 o P n e
 9 o P n e
+0 o O c e
 1 o O c e
 2 o O c e
 3 o O c e
@@ -89,3 +97,25 @@
 9 o O c e
 ( o P b B
 ( o O b B
+- q Z g + N
+- b B g + M
+0 g N n e
+1 g N n e
+2 g N n e
+3 g N n e
+4 g N n e
+5 g N n e
+6 g N n e
+7 g N n e
+8 g N n e
+9 g N n e
+0 g M c e
+1 g M c e
+2 g M c e
+3 g M c e
+4 g M c e
+5 g M c e
+6 g M c e
+7 g M c e
+8 g M c e
+9 g M c e

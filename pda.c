@@ -5,12 +5,14 @@
 
 char state;
 Stack stack;
+boolean floatExist;
 
 void pda_initiate(char fileName[strlength]){
 	reader_openFile(fileName);
 	state = 'q';
 	CreateEmptyStack(&stack);
 	Push(&stack,'Z');
+	floatExist = false;
 }
 
 boolean pda_transition(char alphabet){
@@ -57,6 +59,7 @@ boolean pda_transition(char alphabet){
 		}
 	}
 	if (IsSEmpty(stack)) found = false;
+	if (state == 'd') floatExist = true;
 	return found;
 }
 
@@ -69,4 +72,6 @@ boolean pda_finalState(){
 	return (((state == 'q') || (state == 'n') || (state == 'c')) && (InfoTop(stack) == 'Z'));
 }
 
-
+boolean pda_floatExist(){
+	return (floatExist == true);
+}

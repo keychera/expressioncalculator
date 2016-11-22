@@ -3,32 +3,31 @@
 #include <stdio.h>
 #include "header_dir/stacklist.h"
 #include "header_dir/pda.h"
+#include "header_dir/hitung.h"
 
 int main () {
 	boolean notFinal = false;
 	pda_initiate("pda.txt");
-	pda_showCondition();
 	char sentence[strlength];
-	/*char inp;int ign;
-	scanf("%c %d",&inp,&ign);
-	reader_searchID(inp,sentence,ign);*/
 	scanf("%s",sentence);
 	char *s;
 	for ( s=&sentence[0]; (*s != '\000'); s++ ){
-		//printf("input %c\n",*s);
 		if (pda_transition(*s)) {
 			//pda_showCondition();
 		} else {
-			printf("input tidak diterima PDA\n");
-			boolean notFinal = true;
+			notFinal = true;
 			break;
 		}
 	}
 	if(!notFinal){
 		if (pda_finalState()){
-			printf("input diterima PDA\n");
+			if (pda_floatExist()) {
+				printf("%s\n",debracketize(sentence,'+'));
+				printf("%.2f\n",HitungEkspresi(debracketize(sentence,'+'),'+'));
+			} else
+				printf("%d\n",(int)HitungEkspresi(debracketize(sentence,'+'),'+'));
 		} else {
-			printf("input tidak diterima PDA\n");
+			printf("SINTAK ERROR\n");
 		}
 	}
 	

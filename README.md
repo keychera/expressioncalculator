@@ -5,5 +5,5 @@ just a simple infix mathematic expression calculator that feature the four primi
 
 * Compiling Command:
 ```bash
-gcc -o atest main.c pda.c mystring.c reader.c stacklist.c
+gcc -o atest main.c pda.c mystring.c reader.c stacklist.c hitung.c customlistdp.c
 ```
